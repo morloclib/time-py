@@ -1,0 +1,11 @@
+name: time-py
+version: 0.1.0
+homepage: https://github.com/morloclib/time-py
+synopsis: Python implementations for time operations
+description: Python implementations for the time module
+category: time
+license: MIT
+author: "Zebulun Arendsee"
+maintainer: "z@morloc.io"
+github: https://github.com/morloclib/time-py
+bug-reports: https://github.com/morloclib/time-py

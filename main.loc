@@ -1,0 +1,25 @@
+module time-py (*)
+
+import time
+import root-py
+
+
+record Py => DateTime = "dict"
+record Py => TimeParse = "dict"
+
+source Py from "timelib.py"
+    ( "morloc_now" as now
+    , "morloc_local_offset" as localOffset
+    , "morloc_to_seconds" as toSeconds
+    , "morloc_to_datetime" as toDateTime
+    , "morloc_from_datetime" as fromDateTime
+    , "morloc_weekday" as weekday
+    , "morloc_format_time" as formatTime
+    , "morloc_parse_time" as parseTime
+    )
+
+instance Show Duration where
+  source Py from "timelib.py" ("morloc_show_duration" as show)
+
+instance Readable Duration where
+  source Py from "timelib.py" ("morloc_read_duration" as read)

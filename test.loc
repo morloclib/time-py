@@ -1,0 +1,4 @@
+module test-time-py (test)
+
+import time.test (test)
+import time-py
