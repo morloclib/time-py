@@ -1,6 +1,8 @@
 import time as _time
 from fractions import Fraction
 
+from mlc_types._builtin import Try
+
 _US = 1000000
 _MINUTE = 60 * _US
 _HOUR = 60 * _MINUTE
@@ -17,11 +19,11 @@ _KNOWN = "YmdHMSjfsabz%"
 
 
 def _ok(x):
-    return ("Ok", (x,))
+    return Try.Ok(x)
 
 
 def _err(e):
-    return ("Err", (e,))
+    return Try.Err(e)
 
 
 def _in_i64(x):
