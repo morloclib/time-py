@@ -4,8 +4,8 @@ import time
 import root-py
 
 
-record Py => DateTime = "dict"
-record Py => TimeParse = "dict"
+record Py => DateTime = dict
+record Py => TimeParse = dict
 
 source Py from "timelib.py"
     ( "morloc_now" as now
@@ -16,6 +16,8 @@ source Py from "timelib.py"
     , "morloc_weekday" as weekday
     , "morloc_format_time" as formatTime
     , "morloc_parse_time" as parseTime
+    , "morloc_since_earliest" as sinceEarliest
+    , "morloc_earliest_plus" as earliestPlus
     )
 
 instance Show Duration where

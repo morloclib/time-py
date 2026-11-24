@@ -422,18 +422,14 @@ def _show_positive(d):
 def morloc_show_duration(d):
     if d == 0:
         return "0s"
-    return "-" + _show_positive(-d) if d < 0 else _show_positive(d)
+    return _show_positive(d)
 
 
 def morloc_read_duration(s):
     i = 0
-    neg = False
-    if s[:1] in ("+", "-"):
-        neg = s[0] == "-"
-        i = 1
-    if s[i:] == "0":
+    if s == "0":
         return _ok(0)
-    if i == len(s):
+    if not s:
         return _err("expected a duration such as 1h30m or 2.5s, got {!r}".format(s))
     total = Fraction(0)
     while i < len(s):
@@ -458,7 +454,14 @@ def morloc_read_duration(s):
         total += (int(whole or "0") + Fraction(int(frac or "0"), 10 ** len(frac))) * scale
         i = j + len(name)
     v = int(total)
-    v = -v if neg else v
-    if not _in_i64(v):
-        return _err("duration {!r} is outside the range of I64 microseconds".format(s))
+    if v > 0xFFFFFFFFFFFFFFFF:
+        return _err("duration {!r} is outside the range of U64 microseconds".format(s))
     return _ok(v)
+
+
+def morloc_since_earliest(t):
+    return t + 0x8000000000000000
+
+
+def morloc_earliest_plus(u):
+    return u - 0x8000000000000000
